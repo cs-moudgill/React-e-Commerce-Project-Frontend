@@ -6,9 +6,9 @@ const signInForm=()=>{  //declare globally
     return (
         <div className="form-signin w-50 p-4 offset-sm-3">
   <form>
-    <label for="inputEmail" className="visually-hidden">Email address</label>
-    <input type="email" id="inputEmail" className="form-control my-3" placeholder="Email address" required autofocus />
-    <label for="inputPassword" className="visually-hidden">Password</label>
+    <label className="visually-hidden">Email address</label>
+    <input type="email" id="inputEmail" className="form-control my-3" placeholder="Email address" required />
+    <label className="visually-hidden">Password</label>
     <input type="password" id="inputPassword" className="form-control" placeholder="Password" required />
    <br/>
     <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>

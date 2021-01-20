@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles.css';
-import {API} from '../backend'; //here we are connecting frontend with backend through env.
 import Base from './Base';
 
 function Home() {
