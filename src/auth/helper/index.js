@@ -5,7 +5,7 @@ export const signup=(user)=>{
 return fetch(`${API}/signup`,{
 method:'POST',
 headers:{
-    'Content-Type':'application-json'
+    'Content-Type':'application/json'
 },
 body:JSON.stringify(user)
 })
@@ -40,7 +40,7 @@ export const signout=next=>{
     if(typeof window!=="ündefined"){
         localStorage.removeItem('jwt');
         next();
-        return fetch(`${API}/signout`,{   //get back to backend.
+        return fetch(`${API}signout`,{   //get back to backend.
             method:'GET'
         })
         .then((response)=>console.log('signout success'))

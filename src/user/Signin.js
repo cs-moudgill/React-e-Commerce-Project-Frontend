@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const signInForm=()=>{  //declare globally
     return (
-        <div className="form-signin w-50 p-4 offset-sm-3">
+        <div className="form-signin w-50 offset-sm-3">
   <form>
     <label className="visually-hidden">Email address</label>
     <input type="email" id="inputEmail" className="form-control my-3" placeholder="Email address" required />
