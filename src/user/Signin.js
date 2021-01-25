@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Base from '../core/Base'
 import {Link,Redirect} from 'react-router-dom'
-import { authenticate, isAuthenticated, signin } from '../auth/helper';
+import { authenticate, isAuthenticated, signin } from '../auth/helper/index';
 
 const Signin=()=>{
     const [values,setValues]=useState({
@@ -13,40 +13,55 @@ const Signin=()=>{
     });
     
     const {email,password,error,loading,didRedirect}=values;
-    const {user}=isAuthenticated;
+    const {user}=isAuthenticated();
     const handleChange=(property)=>(event)=>{
         setValues({...values,error:false,[property]:event.target.value}); //...values--->here we are grabbing all the values from useState.
     };
-
-    const successMsg=()=>{
-        return (
-            <div className="alert alert-success w-50 p-2 offset-sm-3">
-            User Created. Please Login <Link to='/signin'>Here</Link>
-            </div>
-        )
-    }
-    
-    const failureMsg=()=>{
-        return (
-            <div className="alert alert-danger w-50 p-2 offset-sm-3">{error}</div>
-        )
-    }
 
     const onSubmit=(event)=>{
     event.preventDefault();
     setValues({...values,error:false,loading:true});
     signin({email,password})
-    .then((data)=>{
+    .then((data)=>{   //here data is 'token and user information' (processed from signin at Backend).
+        console.log(data);
         if(data.error){
             setValues({...values,error:true,loading:false});
         }else{
             authenticate(data,()=>{
-                setValues({...values,error:false,didRedirect:true});
-                console.log('Working Fine');
+             setValues({...values,error:false,didRedirect:true});
             })
         }
     })
     .catch(console.log('Sign In request failed.'));
+    }
+
+    const performRedirect=()=>{
+        if(didRedirect){
+            if(user & user.role===1){
+                return <p>Return to Admin</p>
+            }else{
+                return <p>Return to User</p>
+            }
+        }
+        if(isAuthenticated()){
+            return <Redirect to='/' />;
+        }
+    }
+
+    const loadingMsg=()=>{
+        return (
+            loading && (
+                <div className="alert alert-info" style={{display:loading ? '' : 'none'}}>
+                    <h2>Loading...</h2>
+                </div>
+            )
+        );
+    };
+    
+    const failureMsg=()=>{
+        return (
+            <div className="alert alert-danger w-50 p-2 offset-sm-3" style={{display:error ? '' : 'none'}}>Unable to signin</div>
+        )
     }
 
 
@@ -68,9 +83,10 @@ const signInForm=()=>{  //declare globally
 
     return (
         <Base title="Sign in page" description="A page for user to signin">
-            {/* {successMsg()}
-            {failureMsg()} */}
+            {loadingMsg()}
+            {failureMsg()}
             {signInForm()}
+            {performRedirect()}
             <p className="text-center">{JSON.stringify(values)}</p>
         </Base>
     )

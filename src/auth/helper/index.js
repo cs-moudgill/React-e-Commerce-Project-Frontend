@@ -15,7 +15,7 @@ body:JSON.stringify(user)
 .catch(err=>console.log(err));
 };
 
-export const signin=(user)=>{
+export const signin=(user)=>{   //user : email & password.
     return fetch(`${API}/signin`,{
     method:'POST',
     headers:{
@@ -29,9 +29,10 @@ export const signin=(user)=>{
     .catch(err=>console.log(err));
     };
 
-export const authenticate=(data,next)=>{
+export const authenticate=(data,next)=>{ //here data : token and Signed-In user information.
     if(typeof window!=="ündefined"){
         localStorage.setItem('jwt',JSON.stringify(data));
+        console.log(localStorage);
         next();
     }
 }
