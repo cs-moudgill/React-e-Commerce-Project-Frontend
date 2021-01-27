@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link,withRouter} from 'react-router-dom';
+import { isAuthenticated } from '../auth/helper';
 
+
+//text color for current tab.
 const currentTab=(history,path)=>{
 if(history.location.pathname===path){
     return {color:'#FFFFFF'}
@@ -32,10 +35,13 @@ const Menu=({history})=> {
                <li className="nav-item">
                    <Link style={currentTab(history,'/signin')} className="nav-link" to="/signin">Sign in</Link>
                </li>
-               <li className="nav-item">
+               {isAuthenticated() && (  //It shows the signout link for those users who are signed-In currently.
+                <li className="nav-item">
                    <Link style={currentTab(history,'/signout')} className="nav-link" to="/signout">Signout</Link>
                </li>
-           </ul> 
+               )}
+               
+           </ul>
         </div>
     )
 }
