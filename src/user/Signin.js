@@ -23,7 +23,6 @@ const Signin=()=>{
     setValues({...values,error:false,loading:true});
     signin({email,password})
     .then((data)=>{   //here data is 'token and user information' (processed from signin at Backend).
-        console.log(data);
         if(data.error){
             setValues({...values,error:true,loading:false});
         }else{
@@ -35,18 +34,6 @@ const Signin=()=>{
     .catch(console.log('Sign In request failed.'));
     }
 
-    const performRedirect=()=>{
-        if(didRedirect){
-            if(user & user.role===1){
-                return <p>Return to Admin</p>
-            }else{
-                return <p>Return to User</p>
-            }
-        }
-        if(isAuthenticated()){
-            return <Redirect to='/' />;
-        }
-    }
 
     const loadingMsg=()=>{
         return (
@@ -79,6 +66,19 @@ const signInForm=()=>{  //declare globally
   </form>
 </div>
     )
+}
+
+const performRedirect=()=>{
+    if(didRedirect){
+        if(user & user.role===1){
+            return <p>Return to Admin</p>
+        }else{
+            return <p>Return to User</p>
+        }
+    }
+    if(isAuthenticated()){
+        return <Redirect to='/' />;
+    }
 }
 
     return (

@@ -29,27 +29,26 @@ export const signin=(user)=>{   //user : email & password.
     .catch(err=>console.log(err));
     };
 
-export const authenticate=(data,next)=>{ //here data : token and Signed-In user information.
+export const authenticate=(data,next)=>{ //data includes: token and Signed-In user information.
     if(typeof window!=="ündefined"){
         localStorage.setItem('jwt',JSON.stringify(data));
-        console.log(localStorage);
         next();
     }
 }
 
 export const signout=next=>{
     if(typeof window!=="ündefined"){
-        localStorage.removeItem('jwt');
+        localStorage.removeItem('jwt'); // we do have to remove the token from the browser storage also.
         next();
-        return fetch(`${API}signout`,{   //get back to backend.
+        return fetch(`${API}/signout`,{   //get back to backend.
             method:'GET'
         })
-        .then((response)=>console.log('signout success'))
+        .then((response)=>console.log(response)) //Response received from backend.
         .catch((err)=>console.log(err))
     }
     };
 
-    export const isAuthenticated=()=>{ // check to keep signed in.
+    export const isAuthenticated=()=>{ // check if user is signed in or not.
         if(typeof window=='undefined'){
             return false
         }
