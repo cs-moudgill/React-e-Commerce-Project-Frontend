@@ -3,6 +3,8 @@ import Base from '../core/Base'
 import {Link,Redirect} from 'react-router-dom'
 import { authenticate, isAuthenticated, signin } from '../auth/helper/index';
 
+
+
 const Signin=()=>{
     const [values,setValues]=useState({
         email:'',
@@ -70,10 +72,10 @@ const signInForm=()=>{  //declare globally
 
 const performRedirect=()=>{
     if(didRedirect){
-        if(user & user.role===1){
-            return <p>Return to Admin</p>
+        if(user.role==1){
+            return <Redirect to='/admin/dashboard' />
         }else{
-            return <p>Return to User</p>
+            return <Redirect to='/user/dashboard' />
         }
     }
     if(isAuthenticated()){

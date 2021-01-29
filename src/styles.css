@@ -14,3 +14,16 @@ footer{
   right: 0;
   left: 0;
 }
+
+.signout-css{
+  cursor: pointer;
+}
+
+.badge
+{
+background-color:#198754;
+}
+.badge-important
+{
+background-color:#B94A47!important;
+}
