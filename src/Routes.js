@@ -6,17 +6,22 @@ import Signin from "./user/Signin";
 import Signup from "./user/Signup";
 import UserDashboard from "./user/UserDashBoard";
 import Profile from "./user/Profile";
+import AddCategory from "./admin/AddCategory";
+import AdminRoute from "./auth/helper/AdminRoutes";
+import PrivateRoute from "./auth/helper/PrivateRoutes";
+
 
 function Routes() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/signin" component={Signin} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/admin/dashboard" component={AdminDashboard} />
-        <Route exact path="/user/dashboard" component={UserDashboard} />
+        <Route path="/" exact component={Home} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/signin" exact component={Signin} />
+        <Route path="/profile" exact component={Profile} />
+        <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
+        <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
+        <AdminRoute path="/admin/create/category" exact component={AddCategory} />
       </Switch>
     </Router>
   );

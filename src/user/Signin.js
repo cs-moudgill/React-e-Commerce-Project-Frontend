@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Base from '../core/Base'
-import {Link,Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import { authenticate, isAuthenticated, signin } from '../auth/helper/index';
 
 
@@ -72,7 +72,7 @@ const signInForm=()=>{  //declare globally
 
 const performRedirect=()=>{
     if(didRedirect){
-        if(user.role==1){
+        if(user.role===1){
             return <Redirect to='/admin/dashboard' />
         }else{
             return <Redirect to='/user/dashboard' />
