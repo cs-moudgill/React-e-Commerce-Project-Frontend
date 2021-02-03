@@ -1,5 +1,6 @@
 import { API } from "../../backend";
 
+//create category.
 export const createCategory=(userId,token,category)=>{
 return fetch(`${API}/category/create/${userId}`,{
     method:'POST',
@@ -18,6 +19,7 @@ return fetch(`${API}/category/create/${userId}`,{
 })
 }
 
+//get all categories
 export const getCategories=()=>{
 return fetch(`${API}/categories`,{
     method:'GET'

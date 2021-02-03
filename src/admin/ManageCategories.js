@@ -4,7 +4,7 @@ import Base from '../core/Base'
 const ManageCategories=()=> {
     return (
         <Base>
-            <h1>Assignment</h1>
+            <h1>Page to Manage Categories</h1>
         </Base>
     )
 }
