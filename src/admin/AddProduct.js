@@ -1,9 +1,8 @@
 import React, {useState,useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper/index';
 import Base from '../core/Base'
 import { createProduct, getCategories } from './helper/adminapicall';
-
 
 const AddProduct=()=> {
     const {user,token}=isAuthenticated();
@@ -42,21 +41,37 @@ const AddProduct=()=> {
         const onSubmit = (event) => {
           event.preventDefault();
           setValues({...values,error:'',loading:true});
-          createProduct(user._id,token,formData)
+          createProduct(user._id,token,formData) //trigger api call.
           .then((data)=>{
             if(data.error){
               setValues({...values,error:data.error})
+              errorMsg(data.error);
             }else{
               setValues({...values,name:'',description:'',price:'',photo:'',stock:'',loading:false,createdProduct:data.name})
             }
           })
         };
+
+        
+    
       
         const handleChange = name => event => {
-          const value=name==='photo' ? event.target.file[0] : event.target.value;
+          const value=name==='photo' ? event.target.files[0] : event.target.value;
           formData.set(name,value);
           setValues({...values,[name]:value});
         };
+
+        const successMsg=()=>(
+          <div className="alert alert-success mt-3" style={{display:createdProduct ? '' : 'none'}}>
+          <h4>{createdProduct} created successfully</h4>
+          </div>
+        )
+
+        const errorMsg=(error)=>(
+          <div className="alert alert-warning mt-3" style={{display:error ? '' : 'none'}}>
+          <h4>Product addition failed</h4>
+          </div>
+        )
       
         const createProductForm = () => (
           <form>
@@ -113,7 +128,7 @@ const AddProduct=()=> {
             </div>
             <div className="form-group">
               <input
-                onChange={handleChange("quantity")}
+                onChange={handleChange("stock")}
                 type="number"
                 className="form-control"
                 placeholder="Quantity"
@@ -134,7 +149,11 @@ const AddProduct=()=> {
         <Base title='Add product here!' description='Welcome to Product creation section' className='container bg-info p-4'>
             <Link to='/admin/dashboard' className='btn btn-md btn-success mb-2 rounded'>Admin Home</Link>
             <div className="row bg-dark text-white rounded">
-                <div className="col-md-8 offset-md-2">{createProductForm()}</div>
+                <div className="col-md-8 offset-md-2">
+                {successMsg()}
+                {errorMsg()}
+                {createProductForm()}
+                </div>
             </div>
         </Base>
     )
