@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper/index';
 import Base from '../core/Base'
-import { getCategories } from './helper/adminapicall';
+import { createProduct, getCategories } from './helper/adminapicall';
 
 
 const AddProduct=()=> {
@@ -39,8 +39,17 @@ const AddProduct=()=> {
             preLoad();
         }, []);
 
-        const onSubmit = () => {
-          //
+        const onSubmit = (event) => {
+          event.preventDefault();
+          setValues({...values,error:'',loading:true});
+          createProduct(user._id,token,formData)
+          .then((data)=>{
+            if(data.error){
+              setValues({...values,error:data.error})
+            }else{
+              setValues({...values,name:'',description:'',price:'',photo:'',stock:'',loading:false,createdProduct:data.name})
+            }
+          })
         };
       
         const handleChange = name => event => {
