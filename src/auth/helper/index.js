@@ -52,7 +52,7 @@ export const signout=next=>{
         if(typeof window=='undefined'){
             return false
         }
-        if(localStorage.getItem('jwt')){
+        if(localStorage.getItem('jwt') && typeof window!=='undefined'){
             return JSON.parse(localStorage.getItem('jwt'))
         }else{
             return false;

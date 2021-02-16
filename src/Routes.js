@@ -14,6 +14,7 @@ import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 import UpdateCategory from "./admin/updateCategory";
+import Cart from "./core/Cart";
 
 
 
@@ -25,6 +26,7 @@ function Routes() {
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/profile" exact component={Profile} />
+        <Route path="/cart" exact component={Cart} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
         <AdminRoute path="/admin/create/category" exact component={AddCategory} />
