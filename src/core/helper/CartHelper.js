@@ -43,6 +43,8 @@ export const loadCart = () => {
 export const emptyCart = (next) => {
   if (typeof window !== undefined) {
       localStorage.removeItem('cart')
+      let cart=[];
+      localStorage.setItem("cart", JSON.stringify(cart));
       next();
   }
 };
