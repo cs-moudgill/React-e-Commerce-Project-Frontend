@@ -16,8 +16,6 @@ import UpdateProduct from "./admin/UpdateProduct";
 import UpdateCategory from "./admin/updateCategory";
 import Cart from "./core/Cart";
 
-
-
 function Routes() {
   return (
     <Router>
@@ -29,12 +27,28 @@ function Routes() {
         <Route path="/cart" exact component={Cart} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
-        <AdminRoute path="/admin/create/category" exact component={AddCategory} />
-        <AdminRoute path="/admin/categories" exact component={ManageCategories} />
+        <AdminRoute
+          path="/admin/create/category"
+          exact
+          component={AddCategory}
+        />
+        <AdminRoute
+          path="/admin/categories"
+          exact
+          component={ManageCategories}
+        />
         <AdminRoute path="/admin/create/product" exact component={AddProduct} />
         <AdminRoute path="/admin/products" exact component={ManageProducts} />
-        <AdminRoute path="/admin/product/update/:productId" exact component={UpdateProduct} />
-        <AdminRoute path="/admin/category/update/:categoryId" exact component={UpdateCategory} />
+        <AdminRoute
+          path="/admin/product/update/:productId"
+          exact
+          component={UpdateProduct}
+        />
+        <AdminRoute
+          path="/admin/category/update/:categoryId"
+          exact
+          component={UpdateCategory}
+        />
       </Switch>
     </Router>
   );

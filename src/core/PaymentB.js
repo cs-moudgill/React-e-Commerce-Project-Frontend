@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { emptyCart, loadCart } from "./helper/CartHelper";
+import { emptyCart } from "./helper/CartHelper";
 import { createOrder } from "./helper/OrderHelper";
 import { getmeToken, processPayment } from "./helper/Paymentbhelper";
 import DropIn from "braintree-web-drop-in-react";
 import { isAuthenticated } from "../auth/helper";
 
-const Paymentb = ({ products, setReload, reload = undefined }) => {
+const Paymentb = ({ products, setReload, reload = false }) => {
   const [info, setInfo] = useState({
     loading: false,
     success: false,
